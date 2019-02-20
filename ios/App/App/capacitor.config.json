@@ -1,0 +1,6 @@
+{
+  "appId": "io.skynetinc.templar",
+  "appName": "Templar",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}
