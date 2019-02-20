@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons> -->
+    <ion-title>Welcome</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button color="primary" (click)="showIntercom()">
+        <ion-icon slot="icon-only" name="chatboxes"></ion-icon>
+      </ion-button>
+      <ion-button color="primary" (click)="signIn()">
+        <ion-icon slot="icon-only" name="log-in"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col align-self-center size-md="6" size-lg="6" size-xs="12">
+
+        <ion-card text-center>
+          <ion-img src="assets/templar.svg" width="200px" height="200px" style="display:inline-block"></ion-img>
+          <ion-card-header>
+            <ion-card-subtitle>Work smarter now</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+
+
+            <ion-item lines="none" text-center>
+              <ion-label>
+                <ion-button size="large" slot="start" fill="clear" color="medium" text-capitalize>
+                  <ion-icon slot="start" name="rocket"></ion-icon>
+                    Two simple steps
+                </ion-button>
+              </ion-label>
+            </ion-item>
+
+            <ion-item lines="none" text-center>
+              <ion-label>
+                <ion-button size="large" slot="start" fill="clear" color="medium" text-capitalize>
+                  <ion-icon slot="start" name="time"></ion-icon>
+                    Start in minutes
+                </ion-button>
+              </ion-label>
+            </ion-item>
+
+            <ion-item lines="none" text-center>
+              <ion-label>
+               <ion-button (click)="signUp()" size="large">Start Now</ion-button>
+              </ion-label>
+            </ion-item>
+
+          </ion-card-content>
+        </ion-card>
+
+        <ion-item text-center>
+          <ion-label>
+            <p text-wrap>By clicking the "Start Now" button above, you agree to the Terms and Conditions of Templar, it's use and whatever SkynetInc wants.
+            </p>
+            <ion-button size="small" fill="clear" text-capitalize>Read the T&C's</ion-button>
+          </ion-label>
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

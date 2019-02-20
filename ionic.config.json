@@ -1,0 +1,8 @@
+{
+  "name": "templar",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

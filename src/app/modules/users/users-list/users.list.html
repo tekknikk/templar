@@ -1,0 +1,69 @@
+<ion-header translucent="true">
+
+  <ion-toolbar>
+    <ion-buttons *ngIf="!modalSelect" slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-buttons slot="primary" *ngIf="!modalSelect">
+      <ion-button color="primary" (click)="userNew()">
+        <ion-icon slot="icon-only" name="person-add"></ion-icon>
+      </ion-button>
+      <ion-button color="primary" *ngIf="displayIcon()">
+        <ion-icon slot="icon-only" name="grid"></ion-icon>
+      </ion-button>
+      <ion-button color="primary" *ngIf="displayIcon()">
+        <ion-icon slot="icon-only" name="list"></ion-icon>
+      </ion-button>
+      <ion-button color="primary" *ngIf="displayIcon()">
+        <ion-icon slot="icon-only" name="settings"></ion-icon>
+      </ion-button>
+      <ion-button color="primary">
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="modalSelect" color="primary" (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="primary" *ngIf="modalSelect">
+      <ion-button color="primary" (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>
+      All Users
+    </ion-title>
+
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-searchbar animated autocomplete="on" autocorrect="on" debounce="500" (ionChange)="search($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding fullscreen="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+    <ion-item *ngFor="let user of users">
+      <app-user-avatar *ngIf="user" [user]="user"></app-user-avatar>
+      <ion-label padding-start>
+        <h2>{{user.name}}</h2>
+        <p>{{user.email}}</p>
+        <p>Last Login: {{last(user.modifiedAt)}}</p>
+      </ion-label>
+      <ion-button slot="end" fill="clear" >
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

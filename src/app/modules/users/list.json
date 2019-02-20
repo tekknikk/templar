@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "name" : "Suzy Cuningham",
+    	"email" : "suzy.cuningham@gmail.com",
+    	"modifiedAt" : 1541853099
+    },
+    {
+      "name" : "Bobby Daniels",
+      "email" : "bobby@outlook.com",
+      "modifiedAt" : 1541853099
+    },
+    {
+      "name" : "John Walker",
+      "email" : "johnnywalker@blue.com",
+      "modifiedAt" : 1541853099
+    },
+    {
+      "name" : "Eddy Stevens",
+      "email" : "estevens@yahoo.com",
+      "modifiedAt" : 1541853099
+    },
+    {
+      "name" : "Jan Williams",
+      "email" : "jdubz@msn.com",
+      "modifiedAt" : 1541853099
+    }
+  ]
+}

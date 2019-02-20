@@ -1,0 +1,97 @@
+version: 2.1
+
+executors:
+  web-app:
+    docker:
+      - image: circleci/node:11
+    working_directory: ~/app
+    environment:
+      DOMAIN: skynetinc.io
+      CLUSTER: test
+      NODE_ENV: test
+
+app_cache_dirs: &app_cache_dirs
+  paths:
+    - "node_modules"
+    - "www"
+
+setup_docker: &setup_docker
+  version: 18.06.1-ce
+
+jobs:
+  build:
+    executor: web-app
+    steps:
+      - run:
+          name: "Checking Versions"
+          command: |
+            node --version
+            npm --version
+            docker --version
+
+      - run: sudo apt-get update && sudo apt-get install -y python-pip curl python-dev gettext
+      - checkout
+      - setup_remote_docker
+
+      # - restore_cache:
+      #     key: v1-${CIRCLE_PROJECT_REPONAME}-
+
+      # Copy to workspace for later jobs
+      - run: cp /usr/bin/envsubst ./envsubst
+
+      # AWS CLI
+      - run: sudo pip install awscli==${AWS_CLI_VERSION}
+      - run: eval $(aws ecr get-login --no-include-email)
+
+      #COPY CONFIGs
+      - run: aws s3 cp s3://platform.${DOMAIN}/kubeconfig/${CLUSTER} kubeconfig
+
+      # KUBECTL
+      - run: curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+      - run: chmod +x ./kubectl
+
+      # PACKAGES
+      - run: npm config set prefix ~/.npm
+      - run: npm install -g ionic
+      - run: sudo ln -s /home/circleci/.npm/lib/node_modules/ionic/bin/ionic /usr/local/bin/ionic
+
+      - run: npm install
+
+      # Build BROWSER PWA
+      - run: ionic build --prod
+
+      - save_cache:
+         key: app-{{ .Branch }}-cache-{{ arch }}-{{ checksum "package.json" }}
+         <<: *app_cache_dirs
+      - persist_to_workspace:
+         root: /home/circleci
+         paths: app/*
+
+      - run: docker build -f dockerfile -t ${AWS_ACCOUNT_ID}.dkr.ecr.ap-southeast-2.amazonaws.com/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1} .
+      - run: docker push ${AWS_ACCOUNT_ID}.dkr.ecr.ap-southeast-2.amazonaws.com/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}
+
+  demo:
+    environment:
+      NAMESPACE: demo
+      SSL: "arn:aws:acm:ap-southeast-2:205731849869:certificate/3f9b1773-63fc-4873-97b7-bf85bf39030e"
+    executor: web-app
+    steps:
+      - attach_workspace:
+          at: /home/circleci
+      - run: ./envsubst < template.yml > ${CIRCLE_PROJECT_REPONAME}.yml
+      - run: cat ${CIRCLE_PROJECT_REPONAME}.yml
+      - run: ./kubectl --kubeconfig=kubeconfig --namespace=${NAMESPACE} apply -f ${CIRCLE_PROJECT_REPONAME}.yml --force
+
+workflows:
+  version: 2.1
+  git-push:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+                - develop
+      - demo:
+          requires:
+            - build

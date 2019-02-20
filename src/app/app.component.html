@@ -1,0 +1,30 @@
+<ion-app>
+  <ion-split-pane>
+    <ion-menu>
+      <ion-header text-center>
+        <ion-img src="assets/templar.svg" style="display:inline-block"></ion-img>
+        <!-- <ion-toolbar>
+          <ion-title>Templar</ion-title>
+        </ion-toolbar> -->
+      </ion-header>
+      <ion-content>
+
+        <ion-list>
+          <ion-list-header>
+            Users
+          </ion-list-header>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of userPages">
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

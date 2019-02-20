@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Dashboard</ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button color="primary" (click)="showIntercom()">
+        <ion-icon slot="icon-only" name="chatboxes"></ion-icon>
+      </ion-button>
+      <ion-button color="primary" (click)="signOut()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Workflow tasks</ion-card-subtitle>
+      <ion-card-title>Ready</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-item lines="none">
+        <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+        <ion-label>
+          <h2>Approve new Suppliers</h2>
+          <p>Task One</p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+        <ion-label>
+          <h2>Approve new Offers</h2>
+          <p>Project Y</p>
+        </ion-label>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Workflow tasks</ion-card-subtitle>
+      <ion-card-title>Waiting Suppliers</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-item lines="none">
+        <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+        <ion-label>
+          <h2>Review brief responses</h2>
+          <p>Project Alpha</p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+        <ion-label>
+          <h2>Create Orders for special</h2>
+          <p>Task 4</p>
+        </ion-label>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Workflow tasks</ion-card-subtitle>
+      <ion-card-title>Waiting Customers</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-item lines="none">
+        <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+        <ion-label>
+          <h2>Review quotes to Brief</h2>
+          <p>Project Alpha</p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+        <ion-label>
+          <h2>Create Orders for special</h2>
+          <p>Task 4</p>
+        </ion-label>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

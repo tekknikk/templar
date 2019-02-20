@@ -1,0 +1,72 @@
+
+<ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="primary">
+      <ion-button color="primary" (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Step 1 - Sign Up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col align-self-center size-md="6" size-lg="6" size-xs="12">
+
+          <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+            <ion-list>
+
+              <ion-item lines="none" text-center>
+                <ion-label>
+                  <p text-wrap>Lets get you setup with a user account.</p>
+                </ion-label>
+              </ion-item>
+
+              <ion-item *ngIf="error" text-center>
+                <ion-label color="danger" text-wrap>Error: {{error}}</ion-label>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Name</ion-label>
+                <ion-input type="text" autocorrect="off" autocapitalize="none" formControlName="name"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Email</ion-label>
+                <ion-input type="email" formControlName="email"></ion-input>
+              </ion-item>
+
+
+              <ion-item>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input type="password" formControlName="password"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Phone</ion-label>
+                <ion-input type="tel" formControlName="phone_number"></ion-input>
+              </ion-item>
+
+              <ion-item lines="none" text-center>
+                <ion-label>
+                 <ion-button type="submit" size="large" [disabled]="!signUpForm.valid">Next</ion-button>
+                </ion-label>
+              </ion-item>
+
+<!--
+              <ion-item lines="none" text-center>
+                <ion-label>
+                  <p><a (click)="signIn()">Are you already a Member?</a></p>
+                </ion-label>
+              </ion-item> -->
+
+
+          </ion-list>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
