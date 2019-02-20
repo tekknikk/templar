@@ -8,7 +8,7 @@ Just a Simple development test.
 - Sidemenu (SplitPane) disappears on smaller width screens
 - Some Icons in header toolbar disappear on smaller width screens
 - Additional user features are stubbed in to help illustrate naming convention and possible Cognito integration
-- AHTTP Interceptors are for illustrating usage patterns.  Auth will fail as api endpoint is non existent.
+- HTTP Interceptors are for illustrating usage patterns.  Auth will fail as api endpoint is non existent.
 - CI/CD files (Circle, template and dockerfile) demonstrating containerization, build and deploy
 - NGINX files demonstrate forced redirect to HTTPS when deployed
 - iOS app is tested
